@@ -120,7 +120,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> handleEntidadeNaoEncontradaException(EntityNotFoundException ex, WebRequest request){
+    public ResponseEntity<?> handleEntityNotFoundException(EntityNotFoundException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.NOT_FOUND;
         ProblemType problemType = ProblemType.RECURSO_NAO_ENCONTRADO;
@@ -131,7 +131,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(AccessException.class)
-    public ResponseEntity<?> handleEntidadeNaoEncontradaException(AccessException ex, WebRequest request){
+    public ResponseEntity<?> handleAccessException(AccessException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.FORBIDDEN;
         ProblemType problemType = ProblemType.ACCESS_FAIL;
@@ -142,7 +142,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SignInFailException.class)
-    public ResponseEntity<?> handleEntidadeNaoEncontradaException(SignInFailException ex, WebRequest request){
+    public ResponseEntity<?> handleSignInFailException(SignInFailException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.FORBIDDEN;
         ProblemType problemType = ProblemType.SIGN_IN_FAIL;
@@ -153,7 +153,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     @ExceptionHandler(SignUpFailException.class)
-    public ResponseEntity<?> handleEntidadeNaoEncontradaException(SignUpFailException ex, WebRequest request){
+    public ResponseEntity<?> handleSignUpFailException(SignUpFailException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.CONFLICT;
         ProblemType problemType = ProblemType.SIGN_UP_FAIL;
@@ -162,19 +162,9 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
                 .build();
         return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
     }
-//
-//    @ExceptionHandler(EntidadeEmUsoException.class)
-//    public ResponseEntity<?> handleEntidadeEmUsoException(EntidadeEmUsoException ex, WebRequest request){
-//
-//        HttpStatus status = HttpStatus.CONFLICT;
-//        ProblemType problemType = ProblemType.ENTIDADE_EM_USO;
-//        Problem problem = createProblemBuilder(status, problemType, ex.getMessage())
-//                .build();
-//        return handleExceptionInternal(ex, problem, new HttpHeaders(), HttpStatus.CONFLICT, request);
-//    }
-//
+
     @ExceptionHandler(EntityException.class)
-    public ResponseEntity<?> handleNegocioException(EntityException ex, WebRequest request){
+    public ResponseEntity<?> handleEntityException(EntityException ex, WebRequest request){
 
         HttpStatus status = HttpStatus.BAD_REQUEST;
         ProblemType problemType = ProblemType.ERRO_NEGOCIO;
