@@ -26,6 +26,7 @@ public abstract class GenericEntity {
     private UUID id;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime created;
 
     @UpdateTimestamp

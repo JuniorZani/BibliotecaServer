@@ -46,7 +46,7 @@ public class GenericController
         if(currentData == null){
             return ResponseEntity.notFound().build();
         }
-        BeanUtils.copyProperties(inputData, currentData, "id");
+        BeanUtils.copyProperties(inputData, currentData, "id", "created");
         Type update = typeService.save(currentData);
         return ResponseEntity.ok(update);
     }
