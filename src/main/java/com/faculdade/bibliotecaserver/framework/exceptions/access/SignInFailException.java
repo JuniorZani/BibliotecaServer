@@ -1,4 +1,4 @@
-package com.faculdade.bibliotecaserver.framework.exceptions;
+package com.faculdade.bibliotecaserver.framework.exceptions.access;
 
 public class SignInFailException extends AccessException {
 

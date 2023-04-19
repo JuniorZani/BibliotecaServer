@@ -1,4 +1,4 @@
-package com.faculdade.bibliotecaserver.framework.exceptions;
+package com.faculdade.bibliotecaserver.framework.exceptions.access;
 
 public class SignUpFailException extends AccessException{
     public SignUpFailException(String message) {

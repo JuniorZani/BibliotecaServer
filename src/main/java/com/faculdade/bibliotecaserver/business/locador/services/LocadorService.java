@@ -3,9 +3,9 @@ package com.faculdade.bibliotecaserver.business.locador.services;
 import com.faculdade.bibliotecaserver.business.locador.domain.Locador;
 import com.faculdade.bibliotecaserver.business.locador.repositories.LocadorRepository;
 import com.faculdade.bibliotecaserver.framework.entities.service.GenericService;
-import com.faculdade.bibliotecaserver.framework.exceptions.EntityNotFoundException;
-import com.faculdade.bibliotecaserver.framework.exceptions.SignInFailException;
-import com.faculdade.bibliotecaserver.framework.exceptions.SignUpFailException;
+import com.faculdade.bibliotecaserver.framework.exceptions.entity.EntityNotFoundException;
+import com.faculdade.bibliotecaserver.framework.exceptions.access.SignInFailException;
+import com.faculdade.bibliotecaserver.framework.exceptions.access.SignUpFailException;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;

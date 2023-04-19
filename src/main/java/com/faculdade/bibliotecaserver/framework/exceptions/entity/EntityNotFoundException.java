@@ -1,4 +1,4 @@
-package com.faculdade.bibliotecaserver.framework.exceptions;
+package com.faculdade.bibliotecaserver.framework.exceptions.entity;
 
 public class EntityNotFoundException extends EntityException{
     public EntityNotFoundException(String message) {

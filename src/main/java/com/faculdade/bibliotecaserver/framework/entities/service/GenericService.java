@@ -2,7 +2,7 @@ package com.faculdade.bibliotecaserver.framework.entities.service;
 
 import com.faculdade.bibliotecaserver.framework.entities.domain.GenericEntity;
 import com.faculdade.bibliotecaserver.framework.entities.repositories.GenericRepository;
-import com.faculdade.bibliotecaserver.framework.exceptions.EntityNotFoundException;
+import com.faculdade.bibliotecaserver.framework.exceptions.entity.EntityNotFoundException;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;

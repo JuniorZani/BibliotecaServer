@@ -1,6 +1,10 @@
 package com.faculdade.bibliotecaserver.framework.exception_handler;
 
-import com.faculdade.bibliotecaserver.framework.exceptions.*;
+import com.faculdade.bibliotecaserver.framework.exceptions.access.AccessException;
+import com.faculdade.bibliotecaserver.framework.exceptions.access.SignInFailException;
+import com.faculdade.bibliotecaserver.framework.exceptions.access.SignUpFailException;
+import com.faculdade.bibliotecaserver.framework.exceptions.entity.EntityException;
+import com.faculdade.bibliotecaserver.framework.exceptions.entity.EntityNotFoundException;
 import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
