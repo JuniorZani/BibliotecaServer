@@ -14,9 +14,7 @@ import java.util.UUID;
 public class LocadorService extends GenericService<Locador, LocadorRepository> {
 
     private static String LOCADOR_NAO_ENCONTRADO = "Locador não encontrado";
-
     private static String CREDENCIAIS_INCORRETAS = "Verifique os campos e tente novamente";
-
     private static String LOGIN_INDISPONIVEL = "Login indisponível. Tente outro ou verifique se já tem uma conta no sistema";
 
     public UUID signIn(String login, String senha){
@@ -27,15 +25,25 @@ public class LocadorService extends GenericService<Locador, LocadorRepository> {
         if(!senha.equals(locador.getSenha())){
             throw new SignInFailException(CREDENCIAIS_INCORRETAS);
         }
+
         return locador.getId();
     }
 
     @Override
-    public Locador save(Locador data) {
+    public Locador create(Locador data) {
         boolean locadorExists = getRepository().existsByLogin(data.getLogin());
         if(locadorExists){
             throw new SignUpFailException(LOGIN_INDISPONIVEL);
         }
-        return super.save(data);
+        return super.create(data);
+    }
+
+    @Override
+    public Locador update(Locador data){
+        boolean locadorExists = getRepository().existsByLoginAndIdIsNot(data.getLogin(), data.getId());
+        if(locadorExists){
+            throw new SignUpFailException(LOGIN_INDISPONIVEL);
+        }
+        return super.update(data);
     }
 }
