@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface LocadorRepository extends GenericRepository<Locador> {
     Locador findLocadorByLogin(String login);
+    boolean existsByLogin(String login);
+
 }

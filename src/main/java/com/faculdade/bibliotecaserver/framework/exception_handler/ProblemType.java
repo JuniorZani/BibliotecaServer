@@ -10,7 +10,10 @@ public enum ProblemType {
     RECURSO_NAO_ENCONTRADO("/entidade-nao-encontrada", "Entidade não encontrada"),
     ENTIDADE_EM_USO("/entidade-em-uso", "Entidade em uso"),
     ERRO_NEGOCIO("/erro-de-negocio", "Violação de regra de negócio"),
-    ERRO_NO_SISTEMA("/erro-no-sistema", "Erro no sistema");
+    ERRO_NO_SISTEMA("/erro-no-sistema", "Erro no sistema"),
+    ACCESS_FAIL("/erro-de-acesso", "Erro de acesso ao sistema"),
+    SIGN_IN_FAIL("/erro-de-sign-in", "Erro ao realizar sign in"),
+    SIGN_UP_FAIL("erro-de-sign-up", "Erro ao realizar sign up");
 
     private String title;
     private String uri;

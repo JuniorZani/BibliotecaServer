@@ -1,5 +1,6 @@
 package com.faculdade.bibliotecaserver.framework.entities.domain;
 
+import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
@@ -13,6 +14,7 @@ import java.time.LocalDateTime;
 import java.util.UUID;
 
 
+@Data
 @MappedSuperclass
 public abstract class GenericEntity {
 

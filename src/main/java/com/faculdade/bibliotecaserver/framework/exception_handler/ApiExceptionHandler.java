@@ -1,7 +1,6 @@
 package com.faculdade.bibliotecaserver.framework.exception_handler;
 
-import com.faculdade.bibliotecaserver.framework.exceptions.EntityException;
-import com.faculdade.bibliotecaserver.framework.exceptions.EntityNotFoundException;
+import com.faculdade.bibliotecaserver.framework.exceptions.*;
 import com.fasterxml.jackson.databind.exc.IgnoredPropertyException;
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
@@ -125,6 +124,39 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         HttpStatus status = HttpStatus.NOT_FOUND;
         ProblemType problemType = ProblemType.RECURSO_NAO_ENCONTRADO;
+        String detail = ex.getMessage();
+        Problem problem = createProblemBuilder(status, problemType, detail)
+                .build();
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(AccessException.class)
+    public ResponseEntity<?> handleEntidadeNaoEncontradaException(AccessException ex, WebRequest request){
+
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        ProblemType problemType = ProblemType.ACCESS_FAIL;
+        String detail = ex.getMessage();
+        Problem problem = createProblemBuilder(status, problemType, detail)
+                .build();
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(SignInFailException.class)
+    public ResponseEntity<?> handleEntidadeNaoEncontradaException(SignInFailException ex, WebRequest request){
+
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        ProblemType problemType = ProblemType.SIGN_IN_FAIL;
+        String detail = ex.getMessage();
+        Problem problem = createProblemBuilder(status, problemType, detail)
+                .build();
+        return handleExceptionInternal(ex, problem, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(SignUpFailException.class)
+    public ResponseEntity<?> handleEntidadeNaoEncontradaException(SignUpFailException ex, WebRequest request){
+
+        HttpStatus status = HttpStatus.CONFLICT;
+        ProblemType problemType = ProblemType.SIGN_UP_FAIL;
         String detail = ex.getMessage();
         Problem problem = createProblemBuilder(status, problemType, detail)
                 .build();
