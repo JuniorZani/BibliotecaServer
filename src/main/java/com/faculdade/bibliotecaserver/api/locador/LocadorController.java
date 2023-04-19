@@ -3,7 +3,7 @@ package com.faculdade.bibliotecaserver.api.locador;
 import com.faculdade.bibliotecaserver.business.locador.domain.Locador;
 import com.faculdade.bibliotecaserver.business.locador.repositories.LocadorRepository;
 import com.faculdade.bibliotecaserver.business.locador.services.LocadorService;
-import com.faculdade.bibliotecaserver.framework.controllers.GenericController;
+import com.faculdade.bibliotecaserver.framework.entities.controllers.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;

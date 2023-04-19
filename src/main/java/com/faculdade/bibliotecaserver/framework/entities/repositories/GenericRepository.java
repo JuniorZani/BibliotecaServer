@@ -1,4 +1,4 @@
-package com.faculdade.bibliotecaserver.framework.repositories;
+package com.faculdade.bibliotecaserver.framework.entities.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.NoRepositoryBean;

@@ -1,8 +1,8 @@
-package com.faculdade.bibliotecaserver.framework.controllers;
+package com.faculdade.bibliotecaserver.framework.entities.controllers;
 
-import com.faculdade.bibliotecaserver.framework.entities.GenericEntity;
-import com.faculdade.bibliotecaserver.framework.repositories.GenericRepository;
-import com.faculdade.bibliotecaserver.framework.service.GenericService;
+import com.faculdade.bibliotecaserver.framework.entities.domain.GenericEntity;
+import com.faculdade.bibliotecaserver.framework.entities.repositories.GenericRepository;
+import com.faculdade.bibliotecaserver.framework.entities.service.GenericService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import java.util.UUID;
 public class GenericController
         <   Type extends GenericEntity,
             Service extends GenericService< Type, Repository>,
-            Repository extends GenericRepository <Type> > {
+            Repository extends GenericRepository<Type>> {
 
     @Autowired private Service typeService;
 

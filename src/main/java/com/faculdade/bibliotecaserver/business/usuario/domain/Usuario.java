@@ -1,7 +1,7 @@
 package com.faculdade.bibliotecaserver.business.usuario.domain;
 
 
-import com.faculdade.bibliotecaserver.framework.entities.GenericEntity;
+import com.faculdade.bibliotecaserver.framework.entities.domain.GenericEntity;
 import lombok.Data;
 
 import javax.persistence.MappedSuperclass;
