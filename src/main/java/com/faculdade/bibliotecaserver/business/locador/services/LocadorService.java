@@ -5,7 +5,15 @@ import com.faculdade.bibliotecaserver.business.locador.repositories.LocadorRepos
 import com.faculdade.bibliotecaserver.framework.service.GenericService;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class LocadorService extends GenericService<Locador, LocadorRepository> {
 
+    public UUID signIn(String login, String senha){
+        Locador locador = getRepository().findLocadorByLogin(login);
+
+
+        return null;
+    }
 }
