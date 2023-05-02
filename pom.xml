@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.faculdade</groupId>
-	<artifactId>BibliotecaServer</artifactId>
+	<artifactId>library-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>BibliotecaServer</name>
 	<description>BibliotecaServer</description>
