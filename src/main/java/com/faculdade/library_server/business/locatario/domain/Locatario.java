@@ -21,9 +21,3 @@ public class Locatario extends GenericEntity {
     private String telefone;
 
 }
-
-
-
-
-
-
