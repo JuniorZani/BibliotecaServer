@@ -1,5 +1,6 @@
 package com.faculdade.library_server.framework.entities.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,10 +26,12 @@ public abstract class GenericEntity {
     @Type(type = "uuid-char")
     private UUID id;
 
+    @JsonIgnore
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime created;
 
+    @JsonIgnore
     @UpdateTimestamp
     private LocalDateTime updated;
 

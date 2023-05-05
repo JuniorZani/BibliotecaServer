@@ -26,27 +26,26 @@ public class GenericController
     @GetMapping("{dataId}")
     public ResponseEntity<Type> read(@PathVariable UUID dataId){
         Type data = typeService.read(dataId);
-
-        if(data == null){
-            return ResponseEntity.notFound().build();
-        }
         return ResponseEntity.ok(data);
     }
 
     @PostMapping
     public ResponseEntity<Type> create(@RequestBody Type inputData){
         Type data = typeService.save(inputData);
+
+        if(data != null) {
+            return ResponseEntity
+                    .status(HttpStatus.CREATED)
+                    .body(data);
+        }
         return ResponseEntity
-                .status(HttpStatus.CREATED)
+                .status(HttpStatus.BAD_REQUEST)
                 .body(data);
     }
 
     @PutMapping("{dataId}")
     public ResponseEntity<Type> update(@PathVariable UUID dataId, @RequestBody Type inputData){
         Type currentData = typeService.read(dataId);
-        if(currentData == null){
-            return ResponseEntity.notFound().build();
-        }
         BeanUtils.copyProperties(inputData, currentData, "id", "created");
         Type update = typeService.save(currentData);
         return ResponseEntity.ok(update);

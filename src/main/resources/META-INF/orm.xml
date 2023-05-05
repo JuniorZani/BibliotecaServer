@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm" version="2.2">
+
+    <entity class="com.faculdade.library_server.business.item.domain.Item">
+        <named-entity-graph name="locador-read">
+            <named-attribute-node name="locador"/>
+        </named-entity-graph>
+    </entity>
+
+</entity-mappings>

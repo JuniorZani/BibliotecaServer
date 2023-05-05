@@ -3,6 +3,7 @@ package com.faculdade.library_server.framework.entities.service;
 import com.faculdade.library_server.framework.entities.domain.GenericEntity;
 import com.faculdade.library_server.framework.entities.repositories.GenericRepository;
 import com.faculdade.library_server.framework.exceptions.entity.EntityNotFoundException;
+import com.faculdade.library_server.framework.exceptions.entity.EntityNotSendException;
 import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowire;
@@ -40,12 +41,24 @@ public abstract class GenericService
     public Type update(Type data){
         Type currentData = read(data.getId());
         BeanUtils.copyProperties(data, currentData, "created");
-        return repository.save(currentData);
+        repository.save(currentData);
+        return read(data.getId());
     }
 
     public Type read(UUID dataId){
         return repository.findById(dataId)
                 .orElseThrow(() -> new EntityNotFoundException(String.format("%s não encontrado(a)", typeClass.getSimpleName())));
+    }
+
+    public Type read(Type data){
+        if(data == null){
+            throw new EntityNotSendException(String.format("Campo %s não enviado", typeClass.getSimpleName()));
+        } else {
+            if(data.getId() == null){
+                throw new EntityNotSendException(String.format("Campo %s.id não enviado", typeClass.getSimpleName().toLowerCase()));
+            }
+        }
+        return read(data.getId());
     }
 
     public List<Type> list(){

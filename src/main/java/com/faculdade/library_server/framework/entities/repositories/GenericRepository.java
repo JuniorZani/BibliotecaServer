@@ -7,5 +7,4 @@ import java.util.UUID;
 
 @NoRepositoryBean
 public interface GenericRepository<Type> extends JpaRepository<Type, UUID> {
-
 }

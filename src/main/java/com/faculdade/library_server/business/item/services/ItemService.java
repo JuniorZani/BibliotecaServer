@@ -5,6 +5,15 @@ import com.faculdade.library_server.business.item.repositories.ItemRepository;
 import com.faculdade.library_server.framework.entities.service.GenericService;
 import org.springframework.stereotype.Service;
 
+import java.util.UUID;
+
 @Service
 public class ItemService extends GenericService<Item, ItemRepository> {
+
+    @Override
+    public Item read(UUID data) {
+        Item item = super.read(data);
+
+        return item;
+    }
 }

@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("itens")
 public class ItemController extends GenericController<Item, ItemService, ItemRepository> {
+
 }
