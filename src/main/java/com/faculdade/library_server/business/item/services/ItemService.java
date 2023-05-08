@@ -11,7 +11,8 @@ import java.util.UUID;
 
 @Service
 public class ItemService extends GenericService<Item, ItemRepository, ItemValidatorRepository, ItemValidator> {
-    public void trocarStatus(UUID itemId, ItemStatus status) {
-        getRepository().updateStatusById(itemId, status);
+    public Item emprestar(UUID itemId) {
+        getRepository().updateStatusAndQuantidadeById(itemId);
+        return read(itemId);
     }
 }

@@ -1,6 +1,6 @@
 package com.faculdade.library_server.framework.exceptions.entity;
 
-public abstract class EntityException extends RuntimeException {
+public class EntityException extends RuntimeException {
 
     public EntityException(String message) {
         super(message);

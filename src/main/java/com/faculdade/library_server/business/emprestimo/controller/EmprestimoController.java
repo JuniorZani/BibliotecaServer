@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -19,9 +20,12 @@ import java.util.UUID;
 public class EmprestimoController extends GenericController<Emprestimo, EmprestimoService, EmprestimoRepository, EmprestimoValidatorRepository, EmprestimoValidator> {
 
     @PostMapping("emprestar")
-    public ResponseEntity<Emprestimo> emprestar(@RequestBody UUID itemId, @RequestBody UUID locatarioId){
+    public ResponseEntity<Emprestimo> emprestar(@RequestBody Map<String, String> json){
+        UUID itemId = UUID.fromString(json.get("itemId"));
+        UUID locatarioId = UUID.fromString(json.get("locatarioId"));
 
-        return ResponseEntity.ok().build();
+        Emprestimo emprestimo = getService().emprestar(itemId, locatarioId);
+        return ResponseEntity.ok(emprestimo);
     }
 
 }

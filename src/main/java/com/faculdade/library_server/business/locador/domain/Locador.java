@@ -6,7 +6,6 @@ import com.faculdade.library_server.business.usuario.domain.Usuario;
 import lombok.Data;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
 import java.util.List;
 

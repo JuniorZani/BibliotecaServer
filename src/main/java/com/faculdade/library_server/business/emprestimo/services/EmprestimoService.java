@@ -18,20 +18,27 @@ import java.util.UUID;
 public class EmprestimoService extends GenericService<Emprestimo, EmprestimoRepository, EmprestimoValidatorRepository, EmprestimoValidator> {
 
     @Autowired private ItemService itemService;
+
     @Autowired private LocatarioService locatarioService;
 
     public Emprestimo emprestar(UUID itemId, UUID locatarioId){
         getValidator().emprestar(itemId, locatarioId);
-        itemService.trocarStatus(itemId, ItemStatus.ALUGADO);
 
         Item item = itemService.read(itemId);
+        Integer quantidadeAtual = item.getQuantidade();
+        item.setStatus(ItemStatus.ALUGADO);
+        item.setQuantidade(quantidadeAtual - 1);
+
+        item = itemService.emprestar(itemId);
+
         Locatario locatario = locatarioService.read(locatarioId);
+
         Emprestimo emprestimo = Emprestimo.builder()
                 .item(item)
                 .locatario(locatario)
                 .build();
 
-        return emprestimo;
+        return super.create(emprestimo);
     }
 
 }
