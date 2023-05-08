@@ -2,7 +2,9 @@ package com.faculdade.library_server.api.locador;
 
 import com.faculdade.library_server.business.locador.domain.Locador;
 import com.faculdade.library_server.business.locador.repositories.LocadorRepository;
+import com.faculdade.library_server.business.locador.repositories.LocadorValidatorRepository;
 import com.faculdade.library_server.business.locador.services.LocadorService;
+import com.faculdade.library_server.business.locador.services.LocadorValidator;
 import com.faculdade.library_server.framework.entities.controllers.GenericController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +17,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("locadores")
-public class LocadorController extends GenericController<Locador, LocadorService, LocadorRepository> {
+public class LocadorController extends GenericController<Locador, LocadorService, LocadorRepository, LocadorValidatorRepository, LocadorValidator> {
 
     @Autowired LocadorService locadorService;
 

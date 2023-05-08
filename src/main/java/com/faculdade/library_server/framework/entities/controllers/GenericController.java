@@ -2,7 +2,10 @@ package com.faculdade.library_server.framework.entities.controllers;
 
 import com.faculdade.library_server.framework.entities.domain.GenericEntity;
 import com.faculdade.library_server.framework.entities.repositories.GenericRepository;
+import com.faculdade.library_server.framework.entities.repositories.GenericValidatorRepository;
 import com.faculdade.library_server.framework.entities.service.GenericService;
+import com.faculdade.library_server.framework.entities.service.GenericValidator;
+import lombok.Getter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,24 +17,26 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
-
+@Getter
 @Configurable(preConstruction = true, autowire = Autowire.BY_TYPE)
 public class GenericController
         <   Type extends GenericEntity,
-            Service extends GenericService< Type, Repository>,
-            Repository extends GenericRepository<Type>> {
+            Service extends GenericService< Type, Repository, ValidatorRepository, Validator>,
+            Repository extends GenericRepository<Type>,
+            ValidatorRepository extends GenericValidatorRepository<Type>,
+            Validator extends GenericValidator<Type, ValidatorRepository> > {
 
-    @Autowired private Service typeService;
+    @Autowired private Service service;
 
     @GetMapping("{dataId}")
     public ResponseEntity<Type> read(@PathVariable UUID dataId){
-        Type data = typeService.read(dataId);
+        Type data = service.read(dataId);
         return ResponseEntity.ok(data);
     }
 
     @PostMapping
     public ResponseEntity<Type> create(@RequestBody Type inputData){
-        Type data = typeService.save(inputData);
+        Type data = service.save(inputData);
 
         if(data != null) {
             return ResponseEntity
@@ -45,15 +50,15 @@ public class GenericController
 
     @PutMapping("{dataId}")
     public ResponseEntity<Type> update(@PathVariable UUID dataId, @RequestBody Type inputData){
-        Type currentData = typeService.read(dataId);
+        Type currentData = service.read(dataId);
         BeanUtils.copyProperties(inputData, currentData, "id", "created");
-        Type update = typeService.save(currentData);
+        Type update = service.save(currentData);
         return ResponseEntity.ok(update);
     }
 
     @GetMapping("list")
     public ResponseEntity<List<Type>> list(){
-        return ResponseEntity.ok(typeService.list());
+        return ResponseEntity.ok(service.list());
     }
 
 }

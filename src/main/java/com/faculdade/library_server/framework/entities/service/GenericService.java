@@ -2,6 +2,7 @@ package com.faculdade.library_server.framework.entities.service;
 
 import com.faculdade.library_server.framework.entities.domain.GenericEntity;
 import com.faculdade.library_server.framework.entities.repositories.GenericRepository;
+import com.faculdade.library_server.framework.entities.repositories.GenericValidatorRepository;
 import com.faculdade.library_server.framework.exceptions.entity.EntityNotFoundException;
 import com.faculdade.library_server.framework.exceptions.entity.EntityNotSendException;
 import lombok.Getter;
@@ -19,9 +20,13 @@ import java.util.UUID;
 @Configurable(preConstruction = true, autowire = Autowire.BY_TYPE)
 public abstract class GenericService
         <   Type extends GenericEntity,
-            Repository extends GenericRepository<Type>> {
+            Repository extends GenericRepository<Type>,
+            ValidatorRepository extends GenericValidatorRepository<Type>,
+            Validator extends GenericValidator<Type, ValidatorRepository> > {
 
     @Autowired private Repository repository;
+
+    @Autowired private Validator validator;
 
     Class<Type> typeClass = null;
     public GenericService(){

@@ -2,6 +2,7 @@ package com.faculdade.library_server.business.locador.services;
 
 import com.faculdade.library_server.business.locador.domain.Locador;
 import com.faculdade.library_server.business.locador.repositories.LocadorRepository;
+import com.faculdade.library_server.business.locador.repositories.LocadorValidatorRepository;
 import com.faculdade.library_server.framework.entities.service.GenericService;
 import com.faculdade.library_server.framework.exceptions.access.SignInFailException;
 import com.faculdade.library_server.framework.exceptions.access.SignUpFailException;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import java.util.UUID;
 
 @Service
-public class LocadorService extends GenericService<Locador, LocadorRepository> {
+public class LocadorService extends GenericService<Locador, LocadorRepository, LocadorValidatorRepository, LocadorValidator> {
 
     private static String LOCADOR_NAO_ENCONTRADO = "Locador não encontrado";
     private static String CREDENCIAIS_INCORRETAS = "Verifique os campos e tente novamente";
