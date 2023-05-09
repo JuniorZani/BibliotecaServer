@@ -4,6 +4,9 @@ import com.faculdade.library_server.business.emprestimo.domain.Emprestimo;
 import com.faculdade.library_server.framework.entities.repositories.GenericValidatorRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.UUID;
+
 @Repository
 public interface EmprestimoValidatorRepository extends GenericValidatorRepository<Emprestimo> {
+    boolean existsByIdAndQuantidade(UUID emprestimoId, Integer quantidade);
 }

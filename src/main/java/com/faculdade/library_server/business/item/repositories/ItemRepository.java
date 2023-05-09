@@ -17,8 +17,8 @@ public interface ItemRepository extends GenericRepository<Item> {
     @Modifying
     @Transactional
     @Query("UPDATE Item i " +
-            "SET i.status = 'ALUGADO', i.quantidade = i.quantidade - 1" +
+            "SET i.status = :status, i.quantidade = i.quantidade - :quantidade " +
             "WHERE i.id = :itemId")
-    void updateStatusAndQuantidadeById(UUID itemId);
+    void updateStatusAndQuantidadeById(UUID itemId, ItemStatus status, Integer quantidade);
 
 }

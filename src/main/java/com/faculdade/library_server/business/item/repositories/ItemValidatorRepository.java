@@ -13,6 +13,8 @@ public interface ItemValidatorRepository extends GenericValidatorRepository<Item
 
     boolean existsByIdAndStatus(UUID itemId, ItemStatus status);
 
-    boolean existsByIdAndQuantidadeGreaterThan(UUID itemId, Integer quantity);
+    boolean existsByIdAndQuantidadeGreaterThanEqual(UUID itemId, Integer quantity);
+
+    boolean existsByIdAndQuantidadeEquals(UUID itemId, Integer quantity);
 
 }

@@ -13,19 +13,25 @@ import java.util.UUID;
 public class ItemValidator extends GenericValidator<Item, ItemValidatorRepository> {
 
     private String STATUS_ITEM_INVALIDO = "Status do item inválido, para realizar a operação selecione um item %s";
-    private String ITEM_ESGOTADO = "O item selecionado está esgotado";
+    private String QUANTIDADE_INDISPONIVEL = "O item não corresponde a quantidade solicitada";
+    private String ITEM_ESGOTADO = "O item está esgotado";
 
     public void validateByType(UUID itemId, ItemStatus status){
         boolean existsByStatus = getRepository().existsByIdAndStatus(itemId, status);
         if(!existsByStatus){
-            throw new EntityException(String.format(STATUS_ITEM_INVALIDO, ItemStatus.DISPONIVEL.toString().toLowerCase()));
+            throw new EntityException(String.format(STATUS_ITEM_INVALIDO, status.toString().toLowerCase()));
         }
     }
 
-    public void validateByQuantity(UUID itemId) {
-        boolean esgotado = !getRepository().existsByIdAndQuantidadeGreaterThan(itemId, 0);
+    public void validateByQuantity(UUID itemId, Integer quantidade) {
+        boolean esgotado = getRepository().existsByIdAndQuantidadeEquals(itemId, 0);
         if(esgotado){
             throw new EntityException(ITEM_ESGOTADO);
+        } else {
+            boolean quantidadeIndisponivel = !getRepository().existsByIdAndQuantidadeGreaterThanEqual(itemId, quantidade);
+            if(quantidadeIndisponivel){
+                throw new EntityException(QUANTIDADE_INDISPONIVEL);
+            }
         }
     }
 }
