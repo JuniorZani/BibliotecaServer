@@ -7,7 +7,6 @@ import com.faculdade.library_server.business.item.services.ItemValidator;
 import com.faculdade.library_server.business.locatario.services.LocatarioValidator;
 import com.faculdade.library_server.framework.entities.service.GenericValidator;
 import com.faculdade.library_server.framework.exceptions.entity.EntityException;
-import com.faculdade.library_server.framework.exceptions.entity.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

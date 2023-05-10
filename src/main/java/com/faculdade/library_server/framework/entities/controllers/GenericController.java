@@ -10,11 +10,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Getter
@@ -24,7 +26,7 @@ public class GenericController
             Service extends GenericService< Type, Repository, ValidatorRepository, Validator>,
             Repository extends GenericRepository<Type>,
             ValidatorRepository extends GenericValidatorRepository<Type>,
-            Validator extends GenericValidator<Type, ValidatorRepository> > {
+            Validator extends GenericValidator<Type, ValidatorRepository>> {
 
     @Autowired private Service service;
 
@@ -57,8 +59,12 @@ public class GenericController
     }
 
     @GetMapping("list")
-    public ResponseEntity<List<Type>> list(){
-        return ResponseEntity.ok(service.list());
+    public ResponseEntity<List<Type>> list(@RequestBody(required = false) Map json){
+        return ResponseEntity.ok(specificationList(null, json));
+    }
+
+    public List<Type> specificationList(Specification<Type> specification, Map json){
+        return service.listAll(specification);
     }
 
 }

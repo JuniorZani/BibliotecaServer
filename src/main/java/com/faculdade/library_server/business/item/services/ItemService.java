@@ -13,7 +13,9 @@ import java.util.UUID;
 public class ItemService extends GenericService<Item, ItemRepository, ItemValidatorRepository, ItemValidator> {
 
     public Item emprestar(UUID itemId, Integer quantidade) {
-        return atualizarDisponibilidade(itemId, quantidade, ItemStatus.ALUGADO);
+        Item item = read(itemId);
+        boolean esgotou = (item.getQuantidade() - quantidade == 0);
+        return atualizarDisponibilidade(itemId, quantidade, esgotou ? ItemStatus.ESGOTADO : ItemStatus.DISPONIVEL);
     }
 
     public Item devolver(UUID itemId, Integer quantidade) {
@@ -24,6 +26,5 @@ public class ItemService extends GenericService<Item, ItemRepository, ItemValida
         getRepository().updateStatusAndQuantidadeById(itemId, status, quantidade);
         return read(itemId);
     }
-
 
 }

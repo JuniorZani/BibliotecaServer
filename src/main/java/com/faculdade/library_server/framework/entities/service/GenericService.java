@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.ObjectUtils;
 
 import java.lang.reflect.ParameterizedType;
@@ -66,7 +67,8 @@ public abstract class GenericService
         return read(data.getId());
     }
 
-    public List<Type> list(){
-        return getRepository().findAll();
+    public List<Type> listAll(Specification<Type> specification){
+        return getRepository().findAll(specification);
     }
+
 }

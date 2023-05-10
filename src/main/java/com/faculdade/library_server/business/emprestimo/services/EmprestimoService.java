@@ -41,13 +41,10 @@ public class EmprestimoService extends GenericService<Emprestimo, EmprestimoRepo
 
     public Emprestimo devolver(UUID emprestimoId, Integer quantidade){
         getValidator().devolver(emprestimoId, quantidade);
-
-
         getRepository().updateStatusAndQuantidadeById(emprestimoId, quantidade, EmprestimoStatus.FECHADO);
         Emprestimo emprestimo = read(emprestimoId);
         UUID itemId = emprestimo.getItem().getId();
         itemService.devolver(itemId, quantidade);
         return read(emprestimoId);
     }
-
 }

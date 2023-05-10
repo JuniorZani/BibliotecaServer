@@ -1,21 +1,26 @@
 package com.faculdade.library_server.business.emprestimo.controller;
 
 import com.faculdade.library_server.business.emprestimo.domain.Emprestimo;
+import com.faculdade.library_server.business.emprestimo.domain.EmprestimoStatus;
 import com.faculdade.library_server.business.emprestimo.input_model.EmprestimoInput;
 import com.faculdade.library_server.business.emprestimo.repositories.EmprestimoRepository;
 import com.faculdade.library_server.business.emprestimo.repositories.EmprestimoValidatorRepository;
 import com.faculdade.library_server.business.emprestimo.services.EmprestimoService;
 import com.faculdade.library_server.business.emprestimo.services.EmprestimoValidator;
+import com.faculdade.library_server.business.emprestimo.specification.EmprestimoSpecification;
 import com.faculdade.library_server.framework.entities.controllers.GenericController;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("emprestimos")
-public class EmprestimoController extends GenericController<Emprestimo, EmprestimoService, EmprestimoRepository, EmprestimoValidatorRepository, EmprestimoValidator> {
+public class EmprestimoController extends GenericController<Emprestimo, EmprestimoService, EmprestimoRepository,
+        EmprestimoValidatorRepository, EmprestimoValidator> {
 
     @PostMapping("emprestar")
     public ResponseEntity<Emprestimo> emprestar(@RequestBody EmprestimoInput emprestimoInput){
@@ -31,6 +36,15 @@ public class EmprestimoController extends GenericController<Emprestimo, Empresti
         Integer quantidade = json.get("quantidade");
         Emprestimo emprestimo = getService().devolver(dataId, quantidade);
         return ResponseEntity.ok(emprestimo);
+    }
+
+    @Override
+    public List<Emprestimo> specificationList(Specification<Emprestimo> specification, Map json) {
+        EmprestimoStatus status = null;
+        if(json != null){
+            status = (EmprestimoStatus.valueOf((String)json.get("status")));
+        }
+        return super.specificationList(EmprestimoSpecification.statusSpecification(status), json);
     }
 
 }
