@@ -60,11 +60,12 @@ public class GenericController
 
     @GetMapping("list")
     public ResponseEntity<List<Type>> list(@RequestBody(required = false) Map json){
-        return ResponseEntity.ok(specificationList(null, json));
+        Specification filters = getFilters(json);
+        return ResponseEntity.ok(service.listAll(filters));
     }
 
-    public List<Type> specificationList(Specification<Type> specification, Map json){
-        return service.listAll(specification);
+    public Specification getFilters(Map json){
+        return null;
     }
 
 }

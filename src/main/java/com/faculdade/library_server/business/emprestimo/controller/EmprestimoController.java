@@ -39,12 +39,12 @@ public class EmprestimoController extends GenericController<Emprestimo, Empresti
     }
 
     @Override
-    public List<Emprestimo> specificationList(Specification<Emprestimo> specification, Map json) {
+    public Specification getFilters(Map json) {
         EmprestimoStatus status = null;
         if(json != null){
             status = (EmprestimoStatus.valueOf((String)json.get("status")));
         }
-        return super.specificationList(EmprestimoSpecification.statusSpecification(status), json);
-    }
 
+        return EmprestimoSpecification.statusSpecification(status);
+    }
 }
