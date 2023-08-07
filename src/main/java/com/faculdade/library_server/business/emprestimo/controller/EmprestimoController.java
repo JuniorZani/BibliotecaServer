@@ -1,7 +1,6 @@
 package com.faculdade.library_server.business.emprestimo.controller;
 
 import com.faculdade.library_server.business.emprestimo.domain.Emprestimo;
-import com.faculdade.library_server.business.emprestimo.domain.EmprestimoStatus;
 import com.faculdade.library_server.business.emprestimo.input_model.EmprestimoInput;
 import com.faculdade.library_server.business.emprestimo.repositories.EmprestimoRepository;
 import com.faculdade.library_server.business.emprestimo.repositories.EmprestimoValidatorRepository;
@@ -13,9 +12,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 @RequestMapping("emprestimos")
@@ -39,12 +36,14 @@ public class EmprestimoController extends GenericController<Emprestimo, Empresti
     }
 
     @Override
-    public Specification getFilters(Map json) {
-        EmprestimoStatus status = null;
-        if(json != null){
-            status = (EmprestimoStatus.valueOf((String)json.get("status")));
+    public Specification setFilters(Map json, List<String> ignoredFields) {
+        if(json.isEmpty()){
+            return null;
         }
-
-        return EmprestimoSpecification.statusSpecification(status);
+        if(json.containsKey("status")) {
+            return EmprestimoSpecification.statusSpecification(json.get("status"))
+                    .and(super.setFilters(json, Arrays.asList("status")));
+        }
+        return null;
     }
 }
